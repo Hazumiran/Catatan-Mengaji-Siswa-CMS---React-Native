@@ -1,0 +1,19 @@
+- Native Base
+npm install native-base --save
+react-native link
+
+- Navigation
+npm install @react-navigation/native
+	*Depencies
+		npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
+- react native vector
+npm i react-native-vector-icons
+react-native link react-native-vector-icons
+
+- react splash screen
+npm i react-native-splash-screen --save
+react-native link react-native-splash-screen
+
+- stack nav
+npm i react-navigation-stack

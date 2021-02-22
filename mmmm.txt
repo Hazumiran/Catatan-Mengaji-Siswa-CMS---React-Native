@@ -1,0 +1,3 @@
+echo Kontol
+
+print asep
