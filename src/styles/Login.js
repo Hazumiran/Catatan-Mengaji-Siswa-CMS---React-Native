@@ -1,6 +1,11 @@
 
 import { StyleSheet } from 'react-native';
-
+// Define some colors and default sane values
+const utils = {
+    colors: { primaryColor: '#af0e66' },
+    dimensions: { defaultPadding: 12 },
+    fonts: { largeFontSize: 18, mediumFontSize: 16, smallFontSize: 12 },
+};
 
 const styles = StyleSheet.create({
     backgroundContainer: {
@@ -152,7 +157,50 @@ const styles = StyleSheet.create({
         fontSize: 15,
         right: 70,
 
-    }
+    },
+    //====================================================
+    innerContainer: {
+        marginBottom: 32,
+    },
+    logotypeContainer: {
+        alignItems: 'center',
+    },
+    logotype: {
+        maxWidth: 280,
+        maxHeight: 100,
+        resizeMode: 'contain',
+        alignItems: 'center',
+    },
+    containerStyle: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f6f6f6',
+    },
+    loginButton: {
+        borderColor: utils.colors.primaryColor,
+        borderWidth: 2,
+        padding: utils.dimensions.defaultPadding,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 6,
+    },
+    loginButtonText: {
+        color: utils.colors.primaryColor,
+        fontSize: utils.fonts.mediumFontSize,
+        fontWeight: 'bold',
+    },
+    errorMessageContainerStyle: {
+        marginBottom: 8,
+        backgroundColor: '#fee8e6',
+        padding: 8,
+        borderRadius: 4,
+    },
+    errorMessageTextStyle: {
+        color: '#db2828',
+        textAlign: 'center',
+        fontSize: 12,
+    },
 
 
 });

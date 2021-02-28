@@ -19,6 +19,7 @@ import Mc from 'react-native-vector-icons/MaterialCommunityIcons';
 import Iconse from 'react-native-vector-icons/FontAwesome';
 import styles from './styles/Login';
 import { validationHelper } from './validation/ValidationHelper';
+import axios from 'axios';
 
 import { createAppContainer, StackActions, NavigationActions } from 'react-navigation';
 
@@ -27,28 +28,34 @@ const { width: WIDTH } = Dimensions.get('window')
 
 export default class Login extends Component {
 
-
-
     constructor() {
         super()
         this.state = {
-            showPass: true,
-            press: false,
-            inputs: {
-                general: {
-                    type: 'general',
-                    value: ''
-                },
-                passwordLogin: {
-                    type: 'passwordLogin',
-                    value: ''
-                }
-            }
-        };
-        this.onInputChange = validationHelper.onInputChange.bind(this);
-        this.isValidate = validationHelper.isValidate.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
+            username: '',
+            passwordLogin: '',
+        }
+    };
+
+    // constructor() {
+    //     super()
+    //     this.state = {
+    //         showPass: true,
+    //         press: false,
+    //         inputs: {
+    //             general: {
+    //                 type: 'general',
+    //                 value: ''
+    //             },
+    //             passwordLogin: {
+    //                 type: 'passwordLogin',
+    //                 value: ''
+    //             }
+    //         }
+    //     };
+    //     this.onInputChange = validationHelper.onInputChange.bind(this);
+    //     this.isValidate = validationHelper.isValidate.bind(this);
+    //     this.onSubmit = this.onSubmit.bind(this);
+    // }
     // postData(){
     //     axios.post('http://192.168.43.246:8000/auth/login').then(res=>{
     //         console.log(res.data)
@@ -72,27 +79,27 @@ export default class Login extends Component {
     //     return true;  // Do nothing when back button is pressed
     // }
     onSubmit() {
-        console.log(this.state);
-        const { general, passwordLogin } = this.state.inputs;
-        this.isValidate();
-        if ((general.value && passwordLogin.value) !== '') {
-            this.props.navigation.dispatch(resetAction);
-        }
-        else {
-            this.props.navigation.navigate('Login')
-        }
+        // console.log(this.state);
+        // const { username, passwordLogin } = this.state.inputs;
+        // this.isValidate();
+        // if ((username.value && passwordLogin.value) !== '') {
+        //     this.props.navigation.dispatch(resetAction);
+        // }
+        // else {
+        this.props.navigation.navigate('Login')
+        // }
 
     }
 
-    onError(id) {
-        const { inputs } = this.state;
-        if (inputs[id].error) {
-            return <Text style={styles.errorLabel}>{inputs[id].error}</Text>;
+    // onError(id) {
+    //     const { inputs } = this.state;
+    //     if (inputs[id].error) {
+    //         return <Text style={styles.errorLabel}>{inputs[id].error}</Text>;
 
-        }
-        return null;
+    //     }
+    //     return null;
 
-    }
+    // }
 
     showPass = () => {
         if (this.state.press == false) {
@@ -122,11 +129,14 @@ export default class Login extends Component {
                             placeholder={'Nama Pengguna'}
                             placeholderTextColor={'rgb(92,78,176)'}
                             underlineColorAndroid='transparent'
-                            onChangeText={value => this.onInputChange({ id: 'general', value })}
+                            // onChangeText={value => this.onInputChange({ id: 'general', value })}
+                            onChangeText={(text) => {
+                                this.setState({ username: text });
+                            }}
                         />
-                        <View style={{ left: 10, color: 'red' }}>
+                        {/* <View style={{ left: 10, color: 'red' }}>
                             {this.onError('general')}
-                        </View>
+                        </View> */}
                     </View>
 
 
@@ -138,11 +148,14 @@ export default class Login extends Component {
                             secureTextEntry={this.state.showPass}
                             placeholderTextColor={'rgb(92,78,176)'}
                             underlineColorAndroid='transparent'
-                            onChangeText={value => this.onInputChange({ id: 'passwordLogin', value })}
+                            // onChangeText={value => this.onInputChange({ id: 'passwordLogin', value })}
+                            onChangeText={(text) => {
+                                this.setState({ passwordLogin: text });
+                            }}
                         />
-                        <View style={{ left: 10, color: 'red' }}>
+                        {/* <View style={{ left: 10, color: 'red' }}>
                             {this.onError('passwordLogin')}
-                        </View>
+                        </View> */}
 
                         <TouchableOpacity style={styles.btnEye}
                             onPress={this.showPass.bind(this)}>
@@ -154,7 +167,17 @@ export default class Login extends Component {
                     </View>
 
 
-                    <TouchableOpacity style={styles.btnLogin} onPress={() => this.onSubmit()}>
+                    <TouchableOpacity style={styles.btnLogin}
+                        onPress={() => {
+                            axios.post('http://192.168.1.4:8000/auth/login', {
+                                username: this.state.username,
+                                passwordLogin: this.state.passwordLogin
+                            }).then(response => {
+                                console.log(response.data);
+                            }).catch(error => {
+                                console.log(error);
+                            })
+                        }}>
                         <Text style={styles.text} >Masuk</Text>
                     </TouchableOpacity>
 

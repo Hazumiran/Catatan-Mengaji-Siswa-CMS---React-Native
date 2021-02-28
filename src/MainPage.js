@@ -33,11 +33,12 @@ export default class MainPage extends Component {
   //   }
   // }
   componentDidMount() {
+    LogBox.ignoreLogs(['Animated.event']);
     LogBox.ignoreLogs(["key"]);
     this.getData()
   }
   getData() {
-    axios.get('http://192.168.43.246:8000/santri', { headers: { 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjQzLjI0Njo4MDAwXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxMzE5MjIxMiwiZXhwIjoxNjEzMTk1ODEyLCJuYmYiOjE2MTMxOTIyMTIsImp0aSI6IktBbThmV2tPem5tRlh0c1ciLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.VY6ma0_LuIzWvKRQhfVS7T4rsplLnbdVe2BMBT7eFkE"' } }).then(res => {
+    axios.get('http://192.168.1.4:8000/santri', { headers: { 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuNDo4MDAwXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxNDQyNjY1NCwiZXhwIjoxNjE0NDMwMjU0LCJuYmYiOjE2MTQ0MjY2NTQsImp0aSI6IkdXWnBCNU9vQkRTM0FKU2giLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.KekHmsn3l4O5i62_SSbNlJ9inNDgUXOhbtBCR3yb23U"' } }).then(res => {
       console.log(res.data)
       this.setState({ dataini: res.data.data })
     })

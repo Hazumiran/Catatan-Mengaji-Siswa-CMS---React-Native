@@ -10,7 +10,7 @@ import SplashScreen from './src/SplashScreen';
 import Profile from './src/Profile';
 import MainPage from './src/MainPage';
 import TabNav from './src/TabNav';
-
+import F from './src/F';
 
 export default class App extends Component {
   render() {
@@ -22,7 +22,7 @@ export default class App extends Component {
 
 const AppStackNavigator = createStackNavigator({
 
-
+  F: { screen: F },
   Login: { screen: loglogin },
   ForgotPassword: { screen: Forgot },
   SplashScreen: { screen: SplashScreen },
@@ -34,7 +34,7 @@ const AppStackNavigator = createStackNavigator({
 
 },
   {
-    initialRouteName: 'SplashScreen',
+    initialRouteName: 'F',
     header: null,
     headerMode: 'none'
   }
