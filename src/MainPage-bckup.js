@@ -3,36 +3,19 @@ import { StyleSheet, Image, View, ScrollView, Animated, LogBox, Text, TouchableO
 import {
   Container,
   Card,
-  Thumbnail,
-  
+  Thumbnail
 } from 'native-base';
 
 import axios from 'axios';
 import santriL from '../Image/santri.png';
 import avatarL from '../Image/avatar.jpg';
-// import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
-// import { Icon } from 'native-base';
-import AnimatedHeader from 'react-native-animated-header';
-import Bg from '../assets/backgrounds/bg1.jpg';
 
-getListItems = count => {
-  const items = [];
-  let i = 0;
- 
-  while (i < count) {
-    i++;
-    items.push(
-      <View style={styles.spinnerButton}>
-          <Text style={styles.spinnerText}>
-              awokawokawok
-          </Text>
-      </View>
-    );
-  }
- 
-  return items;
-};
+
+
+const HEADER_MIN_HEIGHT = 0;
+const HEADER_MAX_HEIGHT = 200;
 
 export default class MainPage extends Component {
   constructor(props) {
@@ -41,7 +24,8 @@ export default class MainPage extends Component {
       dataini: [],
       text: ''
     }
-    
+    this.scrollYAnimatedValue = new Animated.Value(0);
+    this.array = [];
   }
   // componentWillMount() {
   //   for (var i = 1; i <= 10; i++) {
@@ -123,24 +107,28 @@ export default class MainPage extends Component {
 
     //ANIMATED HEADER
 
+    const headerHeight = this.scrollYAnimatedValue.interpolate(
+      {
+        inputRange: [0, (HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT)],
+        outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
+        extrapolate: 'clamp'
+      });
+
+    const headerBackgroundColor = this.scrollYAnimatedValue.interpolate(
+      {
+        inputRange: [0, (HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT)],
+        outputRange: ['#5c4eb0', '#5c4eb0'],
+        extrapolate: 'clamp'
+      });
+
     return (
       <Container style={styles.container}>
-        <AnimatedHeader 
-        style={{flex: 1 }}
-        backText='Back'
-        title='Happy coding'
-        renderLeft={() => (<MIcon name='arrow-back' style={{ marginLeft: 20, width: 30, height: 30 }} />)}
-        renderRight={() => (<MIcon name='add' style={{ marginRight: 20 }} />)}
-        backStyle={{ marginLeft: 10 }}
-        backTextStyle={{fontSize: 14, color: '#000'}}
-        titleStyle={{ justifyContent: 'center', fontSize: 22, left: 20, bottom: 20, color: '#fff' }}
-        headerMaxHeight={200}
-        imageSource={Bg}
-        toolbarColor='#FFF'
-        disabled={false}
-      >
+        <View style={styles.header}>
 
-        {/* <Animated.View style={[styles.animatedHeaderContainer, { height: headerHeight, backgroundColor: headerBackgroundColor }]}>
+
+        </View>
+
+        <Animated.View style={[styles.animatedHeaderContainer, { height: headerHeight, backgroundColor: headerBackgroundColor }]}>
           <View style={styles.footer}>
             <Card style={styles.cardCatList}>
               <Image source={santriL} style={{ width: '83%', height: '83%', marginHorizontal: '7%' }} />
@@ -149,16 +137,19 @@ export default class MainPage extends Component {
               Santri
                 </Text>
           </View>
-        </Animated.View> */}
+        </Animated.View>
 
-        <ScrollView>
-          
-          <View style={{marginTop:15, marginBottom: 15}}>
-            {/* {data} */}
-            {getListItems(10)}
+        <ScrollView
+          contentContainerStyle={{ paddingTop: HEADER_MAX_HEIGHT }}
+          scrollEventThrottle={16}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: this.scrollYAnimatedValue } } }]
+          )}>
+          <View style={styles.footer1}>
+            {data}
           </View>
         </ScrollView>
-        </AnimatedHeader>
+
       </Container>
     );
   }
@@ -206,8 +197,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     paddingVertical: 40,
     paddingHorizontal: 50,
-    marginTop: -150,
-    alignItems: 'center'
+    marginTop: -150
   },
   cardCatList: {
     top: 60,
@@ -255,24 +245,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'center',
     top: 60
-  },
-  spinnerButton:{
-    borderRadius: 7,
-    borderWidth: 0.5,
-    borderColor: 'black',
-    backgroundColor: 'rgb(189, 170, 224)',
-    marginHorizontal: '5%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 50,
-    width: '90%',
-    marginVertical: 5
-    
-  },
-  spinnerText:{
-    fontSize: 20,
-    color:'rgb(92, 80, 176)'
-  },
+  }
 
 
 });

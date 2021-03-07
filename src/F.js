@@ -4,12 +4,20 @@ import {
     Text,
     TouchableOpacity,
     Image,
-    TextInput
+    TextInput,
+    ImageBackground,
+    LogBox,
+    Animated
 } from 'react-native';
 
 import Spinner from 'react-native-loading-spinner-overlay';
-
+import { validationHelper } from './validation/ValidationHelper';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Mc from 'react-native-vector-icons/MaterialCommunityIcons';
+import Iconse from 'react-native-vector-icons/FontAwesome';
+import styles from './styles/F-style'
 import APIKit, { setClientToken } from './APIKit';
+
 
 const initialState = {
     username: '',
@@ -17,9 +25,58 @@ const initialState = {
     errors: {},
     isAuthorized: false,
     isLoading: false,
+    hidePassword: true,
 };
 
-class F extends Component {
+export default class F extends Component {
+    constructor(props) {
+        super(props);
+        this.anim = {
+            LogoText: new Animated.Value(0),
+            LogoAnime: new Animated.Value(0),
+            loadingSpinner: false,
+            username: '',
+            passwordLogin: '',
+            showPass: true,
+            press: false,
+            inputs: {
+                general: {
+                    type: 'general',
+                    value: ''
+                },
+                passwordLogin: {
+                    type: 'passwordLogin',
+                    value: ''
+                }
+            }
+        }
+        this.onInputChange = validationHelper.onInputChange.bind(this);
+        this.isValidate = validationHelper.isValidate.bind(this);
+        this.onSubmit = this.onPressLogin.bind(this);
+    }
+    componentDidMount() {
+        LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
+        LogBox.ignoreLogs(['Picker']);
+        const { LogoText, LogoAnime } = this.anim;
+        Animated.parallel([
+            Animated.spring(LogoAnime, {
+                toValue: 1,
+                tension: 10,
+                friction: 20,
+                duration: 40000,
+            }).start(),
+
+            Animated.timing(LogoText, {
+                toValue: 1,
+                duration: 2000,
+                useNativeDriver: true
+            }),
+        ]).start(() => {
+            this.setState({
+                loadingSpinner: true,
+            });
+        });
+    }
     state = initialState;
 
     componentWillUnmount() { }
@@ -92,138 +149,137 @@ class F extends Component {
         return message;
     }
 
+    //show password function
+    // showPass = () => {
+    //     if (this.anim.press == false) {
+    //         this.setState({ showPass: false, press: true })
+    //     } else {
+    //         this.setState({ showPass: true, press: false })
+    //     }
+    // }
+    showPass = () => {
+        this.setState({ hidePassword: !this.state.hidePassword });
+    }
+
     render() {
         const { isLoading } = this.state;
 
         return (
-            <View style={styles.containerStyle}>
+            <ImageBackground
+                style={styles.containerStyle}
+                source={require('../assets/backgrounds/splash-bg-blur.jpg')}
+            >
                 <Spinner visible={isLoading} />
 
-                {!this.state.isAuthorized ? <View>
+                {!this.state.isAuthorized ? <Animated.View style={{
+                    opacity: this.anim.LogoAnime,
+                    top: this.anim.LogoAnime.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [800, 0],
+                    }),
+                    // backgroundColor: '#f6f6f6',
+                    // paddingVertical: 70,
+                    // paddingHorizontal: 20,
+                    // borderTopRightRadius: 35,
+                    // borderBottomRightRadius: 35,
+                    // borderBottomLeftRadius: 35,
+                    // borderTopLeftRadius: 35,
+                    // opacity: 1
+                }}>
                     <View style={styles.logotypeContainer}>
                         <Image
-                            source={require('../Image/logo.png')}
-                            style={styles.logotype}
+                            source={require('../assets/icons/praying.png')}
+                            style={styles.logoStyle}
                         />
                     </View>
+                    <View>
+                        <Icon name={'ios-person-outline'} size={28} color={'white'} style={styles.inputIcon} />
+                        <TextInput
+                            style={styles.input}
+                            value={this.state.username}
+                            maxLength={256}
+                            placeholder="Username"
+                            autoCapitalize="none"
+                            placeholderTextColor="#ffffff"
+                            color="white"
+                            autoCorrect={false}
+                            returnKeyType="next"
+                            onSubmitEditing={event =>
+                                this.passwordInput.wrappedInstance.focus()
+                            }
+                            onChangeText={this.onUsernameChange}
+                            underlineColorAndroid="transparent"
+                            placeholderTextColor="#fff"
+                        />
 
-                    <TextInput
-                        style={styles.input}
-                        value={this.state.username}
-                        maxLength={256}
-                        placeholder="Enter username..."
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        returnKeyType="next"
-                        onSubmitEditing={event =>
-                            this.passwordInput.wrappedInstance.focus()
-                        }
-                        onChangeText={this.onUsernameChange}
-                        underlineColorAndroid="transparent"
-                        placeholderTextColor="#999"
-                    />
+                        {this.getErrorMessageByField('username')}
+                        <View style={{
+                            backgroundColor: '#fff',
+                            height: 1,
+                            width: 250,
+                            alignSelf: 'center',
+                            top: -20
+                        }} />
+                    </View>
+                    <View>
+                        <Icon name={'ios-lock-closed-outline'} size={28} color={'white'} style={styles.inputIcon} />
+                        <TextInput
+                            ref={node => {
+                                this.passwordInput = node;
+                            }}
+                            style={styles.input}
+                            value={this.state.password}
+                            maxLength={40}
+                            placeholder="Password"
+                            onChangeText={this.onPasswordChange}
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            returnKeyType="done"
+                            blurOnSubmit={true}
+                            onSubmitEditing={this.onPressLogin.bind(this)}
+                            secureTextEntry={this.state.hidePassword}
+                            underlineColorAndroid="transparent"
+                            placeholderTextColor="#fff"
 
-                    {this.getErrorMessageByField('username')}
+                        /><TouchableOpacity activeOpacity={0.8} style={styles.btnEye}
+                            onPress={this.showPass}>
 
-                    <TextInput
-                        ref={node => {
-                            this.passwordInput = node;
-                        }}
-                        style={styles.input}
-                        value={this.state.password}
-                        maxLength={40}
-                        placeholder="Enter password..."
-                        onChangeText={this.onPasswordChange}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        returnKeyType="done"
-                        blurOnSubmit
-                        onSubmitEditing={this.onPressLogin.bind(this)}
-                        secureTextEntry
-                        underlineColorAndroid="transparent"
-                        placeholderTextColor="#999"
-                    />
+                            <Icon name={this.state.hidePassword == false ? 'ios-eye-outline' : 'ios-eye-off-outline'} size={26} color={'white'} />
+                        </TouchableOpacity>
+                        <View style={{
+                            backgroundColor: '#fff',
+                            height: 1,
+                            width: 250,
+                            alignSelf: 'center',
+                            top: -20
+                        }} />
 
-                    {this.getErrorMessageByField('password')}
+                        {this.getErrorMessageByField('password')}
 
-                    {this.getNonFieldErrorMessage()}
-
+                        {this.getNonFieldErrorMessage()}
+                    </View>
                     <TouchableOpacity
                         style={styles.loginButton}
                         onPress={this.onPressLogin.bind(this)}>
                         <Text style={styles.loginButtonText}>LOGIN</Text>
                     </TouchableOpacity>
-                </View> : <View><Text>Successfully authorized!</Text></View>}
-            </View>
+
+                    <View style={{ top: 10 }}>
+                        <TouchableOpacity style={{
+                            alignSelf: 'flex-end',
+                            marginBottom: 20,
+
+                        }}
+                            onPress={() => this.props.navigation.navigate('ForgotPassword')}>
+                            <Text style={{ color: '#fff', right: 5, fontSize: 18, }}>
+                                &nbsp; Lupa Password?
+                     </Text>
+                        </TouchableOpacity>
+
+
+                    </View>
+                </Animated.View> : <View><Text>Successfully authorized!</Text></View>}
+            </ImageBackground>
         );
     }
 }
-
-// Define some colors and default sane values
-const utils = {
-    colors: { primaryColor: '#af0e66' },
-    dimensions: { defaultPadding: 12 },
-    fonts: { largeFontSize: 18, mediumFontSize: 16, smallFontSize: 12 },
-};
-
-// Define styles here
-const styles = {
-    innerContainer: {
-        marginBottom: 32,
-    },
-    logotypeContainer: {
-        alignItems: 'center',
-    },
-    logotype: {
-        maxWidth: 280,
-        maxHeight: 100,
-        resizeMode: 'contain',
-        alignItems: 'center',
-    },
-    containerStyle: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#f6f6f6',
-    },
-    input: {
-        height: 50,
-        padding: 12,
-        backgroundColor: 'white',
-        borderRadius: 6,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.05,
-        shadowRadius: 4,
-        marginBottom: utils.dimensions.defaultPadding,
-    },
-    loginButton: {
-        borderColor: utils.colors.primaryColor,
-        borderWidth: 2,
-        padding: utils.dimensions.defaultPadding,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 6,
-    },
-    loginButtonText: {
-        color: utils.colors.primaryColor,
-        fontSize: utils.fonts.mediumFontSize,
-        fontWeight: 'bold',
-    },
-    errorMessageContainerStyle: {
-        marginBottom: 8,
-        backgroundColor: '#fee8e6',
-        padding: 8,
-        borderRadius: 4,
-    },
-    errorMessageTextStyle: {
-        color: '#db2828',
-        textAlign: 'center',
-        fontSize: 12,
-    },
-};
-
-export default F;

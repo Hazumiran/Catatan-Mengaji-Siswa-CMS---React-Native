@@ -3,7 +3,7 @@ import {
     Image,
     View,
     Text,
-    TouchableOpacity,
+    ImageBackground,
     Animated,
     LogBox
 } from 'react-native';
@@ -50,7 +50,7 @@ export default class SplashScreen extends Component {
 
         }, 3500);
         return (
-            <View style={styles.container}>
+            <ImageBackground style={styles.container} source={require('../assets/backgrounds/splash-bg.jpg')}>
                 <Animated.View style={{ opacity: this.state.LogoText }}>
                     <View style={styles.headerTextWrapper}>
                         <Text style={styles.headerText}>
@@ -79,11 +79,11 @@ export default class SplashScreen extends Component {
                     }}>
                     <Image style={styles.mainImage} source={require('../assets/icons/praying.png')} />
                 </Animated.View>
-            </View>
+            </ImageBackground>
         )
     }
 }
 const resetAction = StackActions.reset({
     index: 0,
-    actions: [NavigationActions.navigate({ routeName: 'Login' })],
+    actions: [NavigationActions.navigate({ routeName: 'F' })],
 });
