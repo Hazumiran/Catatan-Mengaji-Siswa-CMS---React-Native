@@ -17,6 +17,7 @@ import Mc from 'react-native-vector-icons/MaterialCommunityIcons';
 import Iconse from 'react-native-vector-icons/FontAwesome';
 import styles from './styles/F-style'
 import APIKit, { setClientToken } from './APIKit';
+import { createAppContainer, StackActions, NavigationActions } from 'react-navigation';
 
 
 const initialState = {
@@ -98,6 +99,7 @@ export default class F extends Component {
             // Set JSON Web Token on success
             setClientToken(data.token);
             this.setState({ isLoading: false, isAuthorized: true });
+            this.props.navigation.dispatch(resetAction);
         };
 
         const onFailure = error => {
@@ -149,14 +151,6 @@ export default class F extends Component {
         return message;
     }
 
-    //show password function
-    // showPass = () => {
-    //     if (this.anim.press == false) {
-    //         this.setState({ showPass: false, press: true })
-    //     } else {
-    //         this.setState({ showPass: true, press: false })
-    //     }
-    // }
     showPass = () => {
         this.setState({ hidePassword: !this.state.hidePassword });
     }
@@ -177,14 +171,7 @@ export default class F extends Component {
                         inputRange: [0, 1],
                         outputRange: [800, 0],
                     }),
-                    // backgroundColor: '#f6f6f6',
-                    // paddingVertical: 70,
-                    // paddingHorizontal: 20,
-                    // borderTopRightRadius: 35,
-                    // borderBottomRightRadius: 35,
-                    // borderBottomLeftRadius: 35,
-                    // borderTopLeftRadius: 35,
-                    // opacity: 1
+
                 }}>
                     <View style={styles.logotypeContainer}>
                         <Image
@@ -283,3 +270,7 @@ export default class F extends Component {
         );
     }
 }
+const resetAction = StackActions.reset({
+    index: 0,
+    actions: [NavigationActions.navigate({ routeName: 'TabNav' })],
+});

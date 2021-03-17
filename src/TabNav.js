@@ -30,7 +30,7 @@ import Profile from './Profile';
 //     }
 // }
 
-class About extends React.Component {
+class Quran extends React.Component {
     render() {
         return (
             <View style={styles.container}>
@@ -55,20 +55,22 @@ const styles = StyleSheet.create({
 });
 
 const TabNavigator = createMaterialBottomTabNavigator({
-    Profile: {
-        screen: Profile,
+
+    Quran: {
+        screen: Quran,
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => (
                 <View>
-                    <Icon style={[{ color: tintColor }]} size={25} name={'ios-person'} />
+                    <Icon style={[{ color: tintColor }]} size={25} name={'book-sharp'} />
                 </View>
             ),
 
             activeColor: "#f0edf6",
-            inactiveColor: "#3e2465",
-            barStyle: { backgroundColor: '#694fad' },
+            inactiveColor: "#92c5c2",
+            barStyle: { backgroundColor: '#136DF3' },
         }
     },
+
 
     Home: {
         screen: MainPage,
@@ -80,25 +82,13 @@ const TabNavigator = createMaterialBottomTabNavigator({
             ),
             activeColor: "#f0edf6",
             inactiveColor: "#92c5c2",
-            barStyle: { backgroundColor: '#2c6d6a' },
+            barStyle: { backgroundColor: '#136DF3' },
         }
     },
 
-    About: {
-        screen: About,
-        navigationOptions: {
-            tabBarIcon: ({ tintColor }) => (
-                <View>
-                    <Icon style={[{ color: tintColor }]} size={25} name={'ios-information-circle-sharp'} />
-                </View>
-            ),
 
-            activeColor: "#f0edf6",
-            inactiveColor: "#ebaabd",
-            barStyle: { backgroundColor: '#d13560' },
-        }
-    },
 },
+
     {
         initialRouteName: "Home",
         activeColor: "#f0edf6",

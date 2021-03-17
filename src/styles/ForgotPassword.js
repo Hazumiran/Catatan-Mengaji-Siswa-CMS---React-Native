@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    backgroundColor: 'rgb(92,78,176)'
+
   },
   scrollView: {
     flex: 1,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     paddingLeft: '10%'
   },
   forgotPasswordSubheading: {
-    color: 'rgb(92,78,176)',
+    color: 'white',
     fontWeight: '600',
     fontSize: 25,
     marginTop: '10%',
@@ -79,7 +79,8 @@ const styles = StyleSheet.create({
     marginVertical: '4%',
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginTop: 25
   },
   buttonFont: {
     color: 'white',
@@ -91,16 +92,29 @@ const styles = StyleSheet.create({
     fontSize: 10
   },
   infoText: {
-    fontSize: 17,
+    fontSize: 20,
     textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    color: 'rgb(92,78,176)'
+    color: 'white'
+  },
+  containerStyle: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f6f6f6',
+  }, logoStyle: {
+    marginTop: 25,
+    marginBottom: 30,
+    height: 100,
+    width: 100,
+    alignSelf: 'center',
+    borderRadius: 60
   },
   footer: {
     flex: 1,
-    backgroundColor: 'white',
+
     borderTopRightRadius: 80,
     paddingTop: '25%',
     paddingBottom: '40%',

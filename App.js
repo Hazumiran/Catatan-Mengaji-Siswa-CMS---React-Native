@@ -4,13 +4,19 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 
 
-import loglogin from './src/Login';
+
 import Forgot from './src/ForgotPassword';
 import SplashScreen from './src/SplashScreen';
 import Profile from './src/Profile';
 import MainPage from './src/MainPage';
+import Quran from './src/MainPage-b'
 import TabNav from './src/TabNav';
 import F from './src/F';
+import Route from './src/Route';
+import AlFatihah from './src/surat/AlFatihah';
+import Mission from './src/mission';
+import Feedback from './src/Feedback';
+import Crud from './src/Crud';
 
 export default class App extends Component {
   render() {
@@ -23,18 +29,23 @@ export default class App extends Component {
 const AppStackNavigator = createStackNavigator({
 
   F: { screen: F },
-  Login: { screen: loglogin },
+  Crud: { screen: Crud },
   ForgotPassword: { screen: Forgot },
   SplashScreen: { screen: SplashScreen },
   MainPage: { screen: MainPage },
   Profile: { screen: Profile },
-  TabNav: { screen: TabNav }
+  Mission: { screen: Mission },
+  Feedback: { screen: Feedback },
+  Quran: { screen: Quran },
+  TabNav: { screen: TabNav },
+  AlFatihah: { screen: AlFatihah },
+  Route: { screen: Route }
 
 
 
 },
   {
-    initialRouteName: 'SplashScreen',
+    initialRouteName: 'Crud',
     header: null,
     headerMode: 'none'
   }
@@ -43,7 +54,7 @@ const AppStackNavigator = createStackNavigator({
 
 const AppContainer = createAppContainer(AppStackNavigator);
 
-
+// ---------------------------------------------------------
 // import 'react-native-gesture-handler';
 // import React, { useEffect, useState, Component } from 'react';
 // import { NavigationContainer } from '@react-navigation/native';

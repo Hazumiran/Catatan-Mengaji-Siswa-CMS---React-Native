@@ -11,13 +11,9 @@ import {
     ScrollView,
     TouchableOpacity, TouchableOpacityBase
 } from 'react-native';
-import { Divider } from 'react-native-paper';
-import bgImage from '../Image/bg1.jpg'
+import { createAppContainer, StackActions, NavigationActions } from 'react-navigation';
 import logo from '../Image/logo.png'
 import Icon from 'react-native-vector-icons/Ionicons'
-import Mc from 'react-native-vector-icons/MaterialCommunityIcons'
-import Iconse from 'react-native-vector-icons/FontAwesome'
-import { color } from 'react-native-reanimated';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
 
 const { width: WIDTH } = Dimensions.get('window')
@@ -29,7 +25,9 @@ export default class loglogin extends Component {
             press: false
         }
     }
-
+    logout = () => {
+        this.props.navigation.dispatch(resetAction);
+    }
     showPass = () => {
         if (this.state.press == false) {
             this.setState({ showPass: false, press: true })
@@ -46,7 +44,7 @@ export default class loglogin extends Component {
                     justifyContent: 'flex-start',
                     alignItems: 'flex-start',
                     position: 'relative'
-                }}><TouchableOpacity style={{ position: 'relative', top: '80%', left: '80%', }} onPress={() => this.props.navigation.navigate('Login')}>
+                }}><TouchableOpacity style={{ position: 'relative', top: '80%', left: '80%', }} onPress={() => this.logout()}>
                         <MIcon name={'logout'}
                             size={35}
                             color={'white'}
@@ -155,12 +153,13 @@ export default class loglogin extends Component {
     }
 }
 
+
 const styles = StyleSheet.create({
     backgroundContainer: {
         flex: 1,
         width: null,
         height: null,
-        backgroundColor: 'rgb(92,78,176)'
+        backgroundColor: '#136DF3'
     },
     logoContainer: {
         alignItems: 'center',
@@ -276,7 +275,10 @@ const styles = StyleSheet.create({
         color: 'rgb(92,78,176)',
         paddingLeft: 10,
         fontSize: 15
-    }
+    },
 
-
+});
+const resetAction = StackActions.reset({
+    index: 0,
+    actions: [NavigationActions.navigate({ routeName: 'F' })],
 });

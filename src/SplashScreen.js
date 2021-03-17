@@ -54,15 +54,15 @@ export default class SplashScreen extends Component {
                 <Animated.View style={{ opacity: this.state.LogoText }}>
                     <View style={styles.headerTextWrapper}>
                         <Text style={styles.headerText}>
-                            Tahfidz
+                            Catatan Mengaji
                     </Text>
                         <Text style={styles.headerText}>
-                            Asuh
+                            Siswa
                     </Text>
                     </View>
                     <View style={styles.subHeaderTextWrapper}>
                         <Text style={styles.subHeaderText}>
-                            Buku Catatan Hafalan Untuk Membuat
+                            Buku Catatan Mengaji Untuk Membuat
                     </Text>
                         <Text style={styles.subHeaderText}>
                             Belajar Lebih Mudah
@@ -85,5 +85,5 @@ export default class SplashScreen extends Component {
 }
 const resetAction = StackActions.reset({
     index: 0,
-    actions: [NavigationActions.navigate({ routeName: 'F' })],
+    actions: [NavigationActions.navigate({ routeName: 'Quran' })],
 });
