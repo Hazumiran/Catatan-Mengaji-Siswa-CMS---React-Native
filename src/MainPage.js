@@ -16,7 +16,7 @@ export default class MainPage extends React.Component {
   change1 = () => {
     return (
 
-      this.props.navigation.navigate('Feedback')
+      this.props.navigation.navigate('Crud')
     );
   }
 

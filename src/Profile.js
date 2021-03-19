@@ -9,7 +9,7 @@ import {
     Dimensions,
     Linking,
     ScrollView,
-    TouchableOpacity, TouchableOpacityBase
+    TouchableOpacity, Alert
 } from 'react-native';
 import { createAppContainer, StackActions, NavigationActions } from 'react-navigation';
 import logo from '../Image/logo.png'
@@ -27,6 +27,7 @@ export default class loglogin extends Component {
     }
     logout = () => {
         this.props.navigation.dispatch(resetAction);
+        alert('berhasil logout')
     }
     showPass = () => {
         if (this.state.press == false) {
@@ -44,7 +45,17 @@ export default class loglogin extends Component {
                     justifyContent: 'flex-start',
                     alignItems: 'flex-start',
                     position: 'relative'
-                }}><TouchableOpacity style={{ position: 'relative', top: '80%', left: '80%', }} onPress={() => this.logout()}>
+                }}><TouchableOpacity style={{ position: 'relative', top: '80%', left: '80%', }} onPress={() => Alert.alert('PERINGATAN',
+                    'apakah anda yakin ingin logout ?', [
+                    {
+                        text: 'tidak',
+                        onPress: () => console.log('button tidak')
+                    },
+                    {
+                        text: 'Ya',
+                        onPress: () => this.logout()
+                    }
+                ])}>
                         <MIcon name={'logout'}
                             size={35}
                             color={'white'}

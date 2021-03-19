@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { StyleSheet, Image, View, ScrollView, Animated, LogBox, Text, TouchableOpacity } from 'react-native';
 import {
   Container,

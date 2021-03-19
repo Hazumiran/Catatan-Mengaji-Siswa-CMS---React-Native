@@ -1,23 +1,26 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState, useEffect, Fragment } from 'react';
 import {
     StyleSheet,
     View,
     Text,
     TextInput,
-    Dimensions,
     Button,
     ScrollView,
-    Image
+    Image,
+    TouchableOpacity,
+    Alert
 
 } from 'react-native';
 import axios from 'axios';
 
 
 
-const Item = ({ ustadz_name, ustadz_address, ustadz_contact, ustadz_birth, institute }) => {
+const Item = ({ ustadz_name, ustadz_address, onPress, ustadz_contact, ustadz_birth, institute, onDelete }) => {
     return (
         <View style={styles.itemContainer}>
-            <Image source={require(`../Image/user.png`)} style={styles.avatar} />
+            <TouchableOpacity onPress={onPress}>
+                <Image source={require(`../Image/user.png`)} style={styles.avatar} />
+            </TouchableOpacity>
             <View style={styles.desc}>
                 <Text style={styles.descNama}>Nama Ustad: {ustadz_name}</Text>
                 <Text style={styles.descAlamat}>almt Ustad: {ustadz_address}</Text>
@@ -25,15 +28,12 @@ const Item = ({ ustadz_name, ustadz_address, ustadz_contact, ustadz_birth, insti
                 <Text style={styles.descTgl}>tgll Ustad: {ustadz_birth}</Text>
                 <Text style={styles.descInst}>inst Ustad: {institute}</Text>
             </View>
-            <Text style={styles.delete}>X</Text>
+            <TouchableOpacity onPress={onDelete}>
+                <Text style={styles.delete}>X</Text>
+            </TouchableOpacity>
         </View>
     )
 }
-
-const { width: WIDTH } = Dimensions.get('window')
-
-
-
 const Crud = () => {
 
     const [ustadz_name, setNama] = useState("");
@@ -42,6 +42,8 @@ const Crud = () => {
     const [ustadz_birth, setTanggal] = useState("");
     const [institute, setInstitute] = useState("");
     const [users, setUsers] = useState([]);
+    const [button, setButton] = useState("Simpan");
+    const [selectedUser, setSelectedUser] = useState({});
 
     useEffect(() => {
         getData();
@@ -50,7 +52,6 @@ const Crud = () => {
 
     const submit = () => {
         const data = {
-            // id,
             ustadz_name,
             ustadz_address,
             ustadz_contact,
@@ -58,48 +59,90 @@ const Crud = () => {
             institute,
 
         }
-        console.log('data before send: ', data);
+        if (button === 'Simpan') {
+            var axios = require('axios');
+            var config = {
+                method: 'post',
+                url: 'http://192.168.1.7:8000/ustadz',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuNzo4MDAwXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxNjEzNTY3NiwiZXhwIjoxNjE2MTM5Mjc2LCJuYmYiOjE2MTYxMzU2NzYsImp0aSI6IjhUbFZ2WkM5ZVd4alBFRkoiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.drYLSm7E2_VORFLPsF_Ex1WXW5PNId0L6YZrdVYu9ec'
+                }, data
+            };
 
-        var axios = require('axios');
+            axios(config)
+                .then(function (response) {
+                    console.log(JSON.stringify(response.data));
+                    alert('berhasil disimpan');
+                    setNama("");
+                    setAlamat("");
+                    setKontak("");
+                    setTanggal("");
+                    setInstitute("");
+                    getData();
 
-        var config = {
-            method: 'post',
-            url: 'http://192.168.1.7:8000/ustadz',
-            headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuNzo4MDAwXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxNTkxMTY0OCwiZXhwIjoxNjE1OTE1MjQ4LCJuYmYiOjE2MTU5MTE2NDgsImp0aSI6IlhlWnplTEFtMFh0ZHFyTEciLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Nbu4zvH_zjKJrTP44kuj82JHy-nJf-QzfLZPtPghFqM'
-            }, data
-        };
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert('gagal tersimpan');
+                });
 
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        } else if (button === 'Update') {
+            var axios = require('axios');
+            var config = {
+                method: 'put',
+                url: `http://192.168.1.7:8000/ustadz/${selectedUser.id}`,
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuNzo4MDAwXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxNjEzNTY3NiwiZXhwIjoxNjE2MTM5Mjc2LCJuYmYiOjE2MTYxMzU2NzYsImp0aSI6IjhUbFZ2WkM5ZVd4alBFRkoiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.drYLSm7E2_VORFLPsF_Ex1WXW5PNId0L6YZrdVYu9ec'
+                }, data
+            };
+
+            axios(config)
+                .then(res => {
+                    alert('berhasil diupdate');
+                    console.log('res update', res);
+                    setNama("");
+                    setAlamat("");
+                    setKontak("");
+                    setTanggal("");
+                    setInstitute("");
+                    getData();
+                    setButton("Simpan");
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert('gagal diupdate');
+                });
+        }
 
     }
 
     const getData = () => {
-        var axios = require('axios');
 
-        var config = {
-            method: 'get',
-            url: 'http://192.168.1.7:8000/ustadz',
-            headers: {
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuNzo4MDAwXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxNTkxMTY0OCwiZXhwIjoxNjE1OTE1MjQ4LCJuYmYiOjE2MTU5MTE2NDgsImp0aSI6IlhlWnplTEFtMFh0ZHFyTEciLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Nbu4zvH_zjKJrTP44kuj82JHy-nJf-QzfLZPtPghFqM'
-            }
-        };
-
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-
+        axios.get('http://192.168.1.7:8000/ustadz', { headers: { 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuNzo4MDAwXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxNjEzNTY3NiwiZXhwIjoxNjE2MTM5Mjc2LCJuYmYiOjE2MTYxMzU2NzYsImp0aSI6IjhUbFZ2WkM5ZVd4alBFRkoiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.drYLSm7E2_VORFLPsF_Ex1WXW5PNId0L6YZrdVYu9ec' } })
+            .then(res => {
+                console.log('res get data: ', res);
+                setUsers(res.data.data);
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+    }
 
+    const selectItem = (item) => {
+        console.log('selected item', item);
+        setSelectedUser(item);
+        setNama(item.ustadz_name);
+        setAlamat(item.ustadz_address);
+        setKontak(item.ustadz_contact);
+        setTanggal(item.ustadz_birth);
+        setInstitute(item.institute);
+        setButton("Update");
+    }
+    const deleteItem = (item) => {
+        console.log(item);
+        axios.delete(`http://192.168.1.7:8000/ustadz/${item.id}`, { headers: { 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xOTIuMTY4LjEuNzo4MDAwXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYxNjEzNTY3NiwiZXhwIjoxNjE2MTM5Mjc2LCJuYmYiOjE2MTYxMzU2NzYsImp0aSI6IjhUbFZ2WkM5ZVd4alBFRkoiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.drYLSm7E2_VORFLPsF_Ex1WXW5PNId0L6YZrdVYu9ec' } })
+            .then(res => {
+                console.log('res delete', res);
+                getData();
+            })
     }
     return (
         <View style={styles.footer1}>
@@ -111,23 +154,41 @@ const Crud = () => {
                 <TextInput style={styles.input} placeholder="Kontak" value={ustadz_contact} onChangeText={(value) => setKontak(value)} />
                 <TextInput style={styles.input} placeholder="Tanggal lahir" value={ustadz_birth} onChangeText={(value) => setTanggal(value)} />
                 <TextInput style={styles.input} placeholder="Nama institue" value={institute} onChangeText={(value) => setInstitute(value)} />
+                <Button title={button} onPress={submit} />
 
-
-                <Button title="Simpan" onPress={submit} />
                 <View style={styles.line} />
-                {users.map(user => {
-                    return <Item ustadz_name={user.ustadz_name} ustadz_address={user.ustadz_address} ustadz_contact={user.ustadz_contact} ustadz_birth={user.ustadz_birth} institute={user.institute} />
-                })}
+                {users.map((user, i) => {
+                    return (
+                        <Fragment key={i}>
+                            <Item
+                                ustadz_name={user.ustadz_name}
+                                ustadz_address={user.ustadz_address}
+                                ustadz_contact={user.ustadz_contact}
+                                ustadz_birth={user.ustadz_birth}
+                                institute={user.institute}
+                                onPress={() => selectItem(user)}
+                                onDelete={() => Alert.alert(
+                                    'PERINGATAN',
+                                    'Apakah anda yakin ingin menghapus data ini ?',
+                                    [
+                                        {
+                                            text: 'tidak',
+                                            onPress: () => console.log('button tidak')
+                                        },
+                                        {
+                                            text: 'Ya',
+                                            onPress: () => deleteItem(user)
+                                        }
+                                    ])} />
+                        </Fragment>
 
+                    )
+                })}
             </ScrollView>
         </View>
-
-
-
-
     )
-}
 
+}
 
 export default Crud
 const styles = StyleSheet.create({
