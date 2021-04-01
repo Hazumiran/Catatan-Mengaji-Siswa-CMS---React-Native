@@ -1,8 +1,41 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, StyleSheet, ImageBackground, AsyncStorage, LogBox } from 'react-native';
 import Day from './day';
 import Card from './card';
+import axios from 'axios';
+import APIkit from './APIKit'
 export default class MainPage extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      dataini: [],
+      text: ''
+    }
+  }
+  logout = () => {
+    this.props.navigation.dispatch(resetAction);
+    alert('berhasil logout')
+  }
+
+  componentDidMount() {
+    LogBox.ignoreLogs(['AsyncStorage']);
+    this.getData()
+  }
+  getData() {
+    AsyncStorage.getItem('token', (err, access_token) => {
+      APIkit.get('/profile', {
+        headers: {
+          Authorization: 'Bearer ' + access_token
+        }
+      })
+        .then((res) => {
+          const dataini = res.data;
+          console.log('res get data: ', res.data);
+          this.setState({ dataini: res.data.data });
+        });
+    })
+  }
   state = {
     color: '#136DF3',
     activestate: 'rgba(255, 255, 255, 0.291821)'
@@ -24,11 +57,18 @@ export default class MainPage extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.containerone}>
-          <View style={styles.boxone}></View>
+          <View style={styles.boxone}>
+
+            <TouchableOpacity style={{
+              alignItems: 'flex-end',
+              marginTop: '10%',
+              marginRight: '5%'
+            }} onPress={() => this.props.navigation.navigate('ProfileUsr')} ><Image source={require('../Image/user.png')} /></TouchableOpacity>
+          </View>
           <View style={styles.boxtwo}>
-            <Text style={styles.name}>Hi, Naufal</Text>
+
+            <Text style={styles.name}>Hi, {this.state.dataini.sie_rohani}</Text>
             <Text style={styles.subtitle}>Ini Catatan Mengaji Kelasmu !</Text>
-            <TouchableOpacity style={{ marginHorizontal: 20, marginTop: '-20%', marginLeft: '90%', }} onPress={() => this.props.navigation.navigate('Profile')} ><Image source={require('../Image/user.png')} /></TouchableOpacity>
           </View>
 
           <View style={styles.boxthree}>
@@ -73,7 +113,8 @@ const styles = StyleSheet.create({
   },
   containerone: {
     flex: 1.5,
-    display: 'flex'
+    display: 'flex',
+
   },
   containertwo: {
     flex: 1,
@@ -87,7 +128,9 @@ const styles = StyleSheet.create({
   },
   boxtwo: {
     flex: 0.8,
-    marginHorizontal: 35
+    marginLeft: '8%',
+    marginRight: '18%'
+
   },
   boxthree: {
     flex: 2.5,

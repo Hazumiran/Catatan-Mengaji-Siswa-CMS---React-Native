@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
 import MainPage from './MainPage';
-import Profile from './Profile';
+import QuranLogin from './QuranLogin';
 
 
 
@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
 
 const TabNavigator = createMaterialBottomTabNavigator({
 
-    Quran: {
-        screen: Quran,
+    QuranLogin: {
+        screen: QuranLogin,
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => (
                 <View>

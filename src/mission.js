@@ -1,85 +1,90 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React, { Fragment } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, AsyncStorage } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Scroll from './scroll';
-import Support from './support';
+import Support from './supportProgress';
+import axios from 'axios';
+import {
+    Header,
+    Container,
+    Title,
+    Right,
+    Left,
+    Content,
+    Item,
+    Body,
+    Button
+} from 'native-base'
+import FIcon from 'react-native-vector-icons/Feather';
+import APIkit from './APIKit';
 
 export default class Mission extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            dataini: [],
+            isLoading: true
+        };
+    }
+    logout = () => {
+        this.props.navigation.dispatch(resetAction);
+        alert('berhasil logout')
+    }
+    renderDataini() {
+        this.state.dataini.map(dataini => <Text> {dataini.tanggal} </Text>);
+    }
+    componentDidMount() {
+        this.getData()
+    }
+    getData() {
+        AsyncStorage.getItem('token', (err, access_token) => {
+            APIkit.get('/progress', {
+                headers: {
+                    Authorization: 'Bearer ' + access_token
+                }
+            })
+                .then((res) => {
+
+                    console.log('res get data: ', res.data.data.data);
+                    this.setState({ dataini: res.data.data.data, isLoading: false });
+                });
+        })
+    }
+
     render() {
+
         return (
-            <View style={styles.container}>
-                <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }} contentContainerStyle={{ width: '100%', height: '120%' }}>
-                    <View style={styles.header}>
-                        <Text style={styles.inline}>Progresku</Text>
-                    </View>
-                    {/* <View style={styles.memos}>
-                        <ScrollView
-                            horizontal={true}
-                            contentContainerStyle={{ width: '200%' }}
-                            showsHorizontalScrollIndicator={false}>
-                            <Scroll bgcolor="#FFBE86"
-                                background={require('../Image/graphtwo.png')}
-                                title="Game Of Chess"
-                                month="Sep - Nov"
-                                animation="bounceInLeft"
-                            />
-                            <Scroll bgcolor="#7DC9E7"
-                                background={require('../Image/graphtwo.png')}
-                                title="100 Km Jogging"
-                                month="Jan - Feb"
-                                animation="bounceInLeft"
-                            />
-                            <Scroll bgcolor="#FFBE86"
-                                background={require('../Image/graphtwo.png')}
-                                title="Netflix and Chill"
-                                month="March - April"
-                            />
-                            <Scroll bgcolor="#7DC9E7"
-                                background={require('../Image/graphtwo.png')}
-                                title="Video Games"
-                                month="Aug - Sep"
-                            />
-                        </ScrollView>
-                    </View> */}
-                    <View style={styles.supportview}>
-                        <Text style={styles.support}>Support</Text>
-                    </View>
-                    <Animatable.View animation="fadeInLeft" duration={1500} style={[styles.rectangleone, {
-                        shadowOffset: { width: 100, height: 100 },
-                        shadowColor: 'rgba(138, 149, 158, 0.2)',
-                        shadowOpacity: 1,
-                        elevation: 30,
-                        backgroundColor: "#FFFFFF"
-                    }]}>
-                        <Support
-                            image={require('../Image/exercise.png')}
-                            title="Daily Exercise"
-                            subtitle="Difficulty on insensible"
-                        />
-                    </Animatable.View>
-                    <Animatable.View animation="fadeInRight" duration={1500} style={[styles.rectangleone, { top: 380, backgroundColor: '#F4F9FC' }]}>
-                        <Support
-                            image={require('../Image/apple.png')}
-                            title="Balanced Diet"
-                            subtitle="Occasional Preference fast"
-                        />
-                    </Animatable.View>
-                    <Animatable.View animation="fadeInLeft" duration={1500} style={[styles.rectangleone, { top: 490, backgroundColor: '#F4F9FC' }]}>
-                        <Support
-                            image={require('../Image/cricket.png')}
-                            title="Sports and Yoga"
-                            subtitle="Services securing health ..."
-                        />
-                    </Animatable.View>
-                    <Animatable.View animation="fadeInRight" duration={1500} style={[styles.rectangleone, { top: 590, backgroundColor: '#F4F9FC' }]}>
-                        <Support
-                            image={require('../Image/apple.png')}
-                            title="Balanced Diet"
-                            subtitle="Occasional Preference fast"
-                        />
-                    </Animatable.View>
-                </ScrollView>
-            </View>
+
+            <Container>
+                <Header>
+                    <Body>
+                        <Title style={{ left: 10 }}>
+                            <Text>
+                                Progresku
+                            </Text>
+                        </Title>
+                    </Body>
+                    <Right>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Crud')}>
+                            <FIcon name="plus" size={30} color={'#fff'} />
+                        </TouchableOpacity>
+                    </Right>
+                </Header>
+                <Content>
+                    <ScrollView>
+                        {this.state.dataini.map((item, i) => (
+                            <Fragment key={i}>
+                                <Support
+                                    tanggal={item.tanggal}
+                                    subSurat={item.surat_ke}
+                                    subAyat={item.ayat_ke}
+                                />
+                            </Fragment>
+                        ))
+                        }
+                    </ScrollView>
+                </Content>
+            </Container >
         );
     }
 }
@@ -92,6 +97,10 @@ const styles = StyleSheet.create({
         flex: 1,
         left: 25,
         top: 30
+    },
+    tambah: {
+        fontSize: 60,
+        fontWeight: "bold", color: '#136DF3',
     },
     inline: {
         fontSize: 38,
@@ -109,7 +118,8 @@ const styles = StyleSheet.create({
     supportview: {
         position: 'absolute',
         left: 25,
-        top: 220
+        top: '10%',
+
     },
     support: {
         fontSize: 25,
@@ -118,11 +128,11 @@ const styles = StyleSheet.create({
         color: '#2E2E2E'
     },
     rectangleone: {
-        height: 85,
+        height: 100,
         width: 300,
         position: 'absolute',
         alignSelf: 'center',
-        top: 270,
+        top: 200,
         borderRadius: 18
     }
 })

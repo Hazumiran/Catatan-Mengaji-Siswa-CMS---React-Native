@@ -7,17 +7,17 @@ import {
     TextInput,
     ImageBackground,
     LogBox,
-    Animated
+    Animated,
+    AsyncStorage
 } from 'react-native';
 
 import Spinner from 'react-native-loading-spinner-overlay';
 import { validationHelper } from './validation/ValidationHelper';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Mc from 'react-native-vector-icons/MaterialCommunityIcons';
-import Iconse from 'react-native-vector-icons/FontAwesome';
 import styles from './styles/F-style'
 import APIKit, { setClientToken } from './APIKit';
 import { createAppContainer, StackActions, NavigationActions } from 'react-navigation';
+// import AsyncStorage from '@react-native-community/async-storage';
 
 
 const initialState = {
@@ -80,7 +80,7 @@ export default class F extends Component {
     }
     state = initialState;
 
-    componentWillUnmount() { }
+
 
     onUsernameChange = username => {
         this.setState({ username });
@@ -95,13 +95,6 @@ export default class F extends Component {
         const payload = { username, password };
         console.log(payload);
 
-        const onSuccess = ({ data }) => {
-            // Set JSON Web Token on success
-            setClientToken(data.token);
-            this.setState({ isLoading: false, isAuthorized: true });
-            this.props.navigation.dispatch(resetAction);
-        };
-
         const onFailure = error => {
             console.log(error && error.response);
             this.setState({ errors: error.response.data, isLoading: false });
@@ -110,8 +103,14 @@ export default class F extends Component {
         // Show spinner when call is made
         this.setState({ isLoading: true });
 
-        APIKit.post('/auth/login', payload)
-            .then(onSuccess)
+        APIKit.post('/login', payload)
+            .then(res => {
+                AsyncStorage.setItem('token', res.data.access_token);
+                this.props.navigation.dispatch(resetAction);
+                console.log('res', res.data)
+
+            })
+
             .catch(onFailure);
     }
 

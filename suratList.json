@@ -1,0 +1,686 @@
+[
+	{
+		"id": "1",
+		"surat": "Al Faatihah",
+		"mean": "Pembukaan",
+        "ayat": "7"
+	},
+	{
+		"id": "2",
+		"surat": "Al Baqarah",
+		"mean": "Sapi Betina",
+        "ayat": "286"
+	},
+	{
+		"id": "3",
+		"surat": "Ali Imran",
+		"mean": "Keluarga Imran",
+        "ayat": "200"
+	},
+	{
+		"id": "4",
+		"surat": "An Nisaa'",
+		"mean": "Wanita",
+        "ayat": "176"
+	},
+	{
+		"id": "5",
+		"surat": "Al Maaidah",
+		"mean": "Hidangan",
+        "ayat": "120"
+	},
+	{
+		"id": "6",
+		"surat": "Al An'aam",
+		"mean": "Binatang ternak",
+        "ayat": "165"
+	},
+	{
+		"id": "7",
+		"surat": "Al A'raaf",
+		"mean": "Tempat tertinggi",
+        "ayat": "206"
+	},
+	{
+		"id": "8",
+		"surat": "Al Anfaal",
+		"mean": "Rampasan perang",
+        "ayat": "75"
+	},
+	{
+		"id": "9",
+		"surat": "At Taubah",
+		"mean": "Pengampunan",
+        "ayat": "129"
+	},
+	{
+		"id": "10",
+		"surat": "Yuunus",
+		"mean": "Yunus",
+        "ayat": "109"
+	},
+	{
+		"id": "11",
+		"surat": "Huud",
+		"mean": "Huud",
+        "ayat": "123"
+	},
+	{
+		"id": "12",
+		"surat": "Yuusuf",
+		"mean": "Yusuf",
+        "ayat": "111"
+	},
+	{
+		"id": "13",
+		"surat": "Ar ra'd",
+		"mean": "Guruh",
+        "ayat": "43"
+	},
+	{
+		"id": "14",
+		"surat": "Ibrahim",
+		"mean": "Ibrahim",
+        "ayat": "52"
+	},
+	{
+		"id": "15",
+		"surat": "Al-Hijr",
+		"mean": "Al-Hijr",
+        "ayat": "99"
+	},
+	{
+		"id": "16",
+		"surat": "An-Nahl",
+		"mean": "Lebah",
+        "ayat": "128"
+	},
+	{
+		"id": "17",
+		"surat": "Al-Isra'",
+		"mean": "Memperjalankan di malam hari",
+        "ayat": "111"
+	},
+	{
+		"id": "18",
+		"surat": "Al-Kahfi",
+		"mean": "Gua",
+        "ayat": "110"
+	},
+	{
+		"id": "19",
+		"surat": "Maryam",
+		"mean": "Maryam",
+        "ayat": "98"
+	},
+	{
+		"id": "20",
+		"surat": "Thaha",
+		"mean": "Thaha",
+        "ayat": "135"
+	},
+	{
+		"id": "21",
+		"surat": "Al-Anbiyaa'",
+		"mean": "Nabi-nabi",
+        "ayat": "112"
+	},
+	{
+		"id": "22",
+		"surat": "Al-Hajj",
+		"mean": "Haji",
+        "ayat": "78"
+	},
+	{
+		"id": "23",
+		"surat": "Al-Mu'minuun",
+		"mean": "Orang-orang yang beriman",
+        "ayat": "118"
+	},
+	{
+		"id": "24",
+		"surat": "An-Nuur",
+		"mean": "Cahaya",
+        "ayat": "64"
+	},
+	{
+		"id": "25",
+		"surat": "Al-Furqaan",
+		"mean": "Pembeda",
+        "ayat": "77"
+	},
+	{
+		"id": "26",
+		"surat": "Asy-Syu'araa'",
+		"mean": "Para penyair",
+        "ayat": "227"
+	},
+	{
+		"id": "27",
+		"surat": "An-Naml",
+		"mean": "Semut",
+        "ayat": "93"
+	},
+	{
+		"id": "28",
+		"surat": "Al-Qashash",
+		"mean": "Cerita-cerita",
+        "ayat": "88"
+	},
+	{
+		"id": "29",
+		"surat": "Al-Ankabut",
+		"mean": "Laba-laba",
+        "ayat": "69"
+	},
+	{
+		"id": "30",
+		"surat": "Ar-Ruum",
+		"mean": "Bangsa Rumawi",
+        "ayat": "60"
+	},
+	{
+		"id": "31",
+		"surat": "Luqman",
+		"mean": "Luqman",
+        "ayat": "34"
+	},
+	{
+		"id": "32",
+		"surat": "As-Sajadah",
+		"mean": "Sujud",
+        "ayat": "30"
+	},
+	{
+		"id": "33",
+		"surat": "Al-Ahzab",
+		"mean": "Golongan yang bersekutu",
+        "ayat": "73"
+	},
+	{
+		"id": "34",
+		"surat": "Saba'",
+		"mean": "Kaum Saba'",
+        "ayat": "54"
+	},
+	{
+		"id": "35",
+		"surat": "Faathir",
+		"mean": "Pencipta",
+        "ayat": "45"
+	},
+	{
+		"id": "36",
+		"surat": "Yaa Siin",
+		"mean": "Yaa siin",
+        "ayat": "83"
+	},
+	{
+		"id": "37",
+		"surat": "Ash-Shaffaat",
+		"mean": "Yang bershaf-shaf",
+        "ayat": "182"
+	},
+	{
+		"id": "38",
+		"surat": "Shaad",
+		"mean": "Shaad",
+        "ayat": "88"
+	},
+	{
+		"id": "39",
+		"surat": "Az-Zumar",
+		"mean": "Rombongan-rombongan",
+        "ayat": "75"
+	},
+	{
+		"id": "40",
+		"surat": "Al-Mu'min",
+		"mean": "Orang yang beriman",
+        "ayat": "85"
+	},
+	{
+		"id": "41",
+		"surat": "Fush Shilat",
+		"mean": "Yang dijelaskan",
+        "ayat": "54"
+	},
+	{
+		"id": "42",
+		"surat": "Asy-Syuura",
+		"mean": "Musyawarat",
+        "ayat": "53"
+	},
+	{
+		"id": "43",
+		"surat": "Az-Zukhruf",
+		"mean": "Perhiasan",
+        "ayat": "89"
+	},
+	{
+		"id": "44",
+		"surat": "Ad-Dukhaan",
+		"mean": "Kabut",
+        "ayat": "59"
+	},
+	{
+		"id": "45",
+		"surat": "Al-Jaatsiyah",
+		"mean": "Yang berlutut",
+        "ayat": "37"
+	},
+	{
+		"id": "46",
+		"surat": "Al-Ahqaaf",
+		"mean": "Bukit-bukit pasir",
+        "ayat": "35"
+	},
+	{
+		"id": "47",
+		"surat": "Muhammad",
+		"mean": "Nabi Muhammad SAW.",
+        "ayat": "38"
+	},
+	{
+		"id": "48",
+		"surat": "Al-Fath",
+		"mean": "Kemenangan",
+        "ayat": "29"
+	},
+	{
+		"id": "49",
+		"surat": "Al-Hujurat",
+		"mean": "Kamar-kamar",
+        "ayat": "18"
+	},
+	{
+		"id": "50",
+		"surat": "Qaaf",
+		"mean": "Qaaf",
+        "ayat": "45"
+	},
+	{
+		"id": "51",
+		"surat": "Adz-Dzaariyaat",
+		"mean": "Angin yang menerbangkan",
+        "ayat": "60"
+	},
+	{
+		"id": "52",
+		"surat": "Ath-Thuur",
+		"mean": "Bukit",
+        "ayat": "49"
+	},
+	{
+		"id": "53",
+		"surat": "An-Najm",
+		"mean": "Bintang",
+        "ayat": "62"
+	},
+	{
+		"id": "54",
+		"surat": "Al-Qamar",
+		"mean": "Bulan",
+        "ayat": "55"
+	},
+	{
+		"id": "55",
+		"surat": "Ar-Rahmaan",
+		"mean": "Yang Maha Pemurah",
+        "ayat": "78"
+	},
+	{
+		"id": "56",
+		"surat": "Al-Waaqiah",
+		"mean": "Hari Kiamat",
+        "ayat": "96"
+	},
+	{
+		"id": "57",
+		"surat": "Al-Hadiid",
+		"mean": "Besi",
+        "ayat": "29"
+	},
+	{
+		"id": "58",
+		"surat": "Al-Mujaadilah",
+		"mean": "Wanita yang mengajukan gugatan",
+        "ayat": "22"
+	},
+	{
+		"id": "59",
+		"surat": "Al-Hasyr",
+		"mean": "Pengusiran",
+        "ayat": "24"
+	},
+	{
+		"id": "60",
+		"surat": "Al-Mumtahanah",
+		"mean": "Perempuan yang diuji",
+        "ayat": "13"
+	},
+	{
+		"id": "61",
+		"surat": "Ash-Shaff",
+		"mean": "Barisan",
+        "ayat": "14"
+	},
+	{
+		"id": "62",
+		"surat": "Al-Jumu'ah",
+		"mean": "Hari Jum'at",
+        "ayat": "11"
+	},
+	{
+		"id": "63",
+		"surat": "Al-Munaafiquun",
+		"mean": "Orang-orang munafik",
+        "ayat": "11"
+	},
+	{
+		"id": "64",
+		"surat": "At-Taghaabun",
+		"mean": "Hari ditampakkan segala kesalahan",
+        "ayat": "18"
+	},
+	{
+		"id": "65",
+		"surat": "Ath-Thalaaq",
+		"mean": "Talak",
+        "ayat": "12"
+	},
+	{
+		"id": "66",
+		"surat": "At-Tahrim",
+		"mean": "Mengharamkan",
+        "ayat": "12"
+	},
+	{
+		"id": "67",
+		"surat": "Al-Mulk",
+		"mean": "Kerajaan",
+        "ayat": "30"
+	},
+	{
+		"id": "68",
+		"surat": "Al-Qalam",
+		"mean": "Kalam",
+        "ayat": "52"
+	},
+	{
+		"id": "69",
+		"surat": "Al-Haaqqah",
+		"mean": "Hari kiamat",
+        "ayat": "52"
+	},
+	{
+		"id": "70",
+		"surat": "Al-Ma'aarij",
+		"mean": "Tempat-tempat naik",
+        "ayat": "44"
+	},
+	{
+		"id": "71",
+		"surat": "Nuh",
+		"mean": "Nabi Nuh",
+        "ayat": "28"
+	},
+	{
+		"id": "72",
+		"surat": "Al-Jin",
+		"mean": "Jin",
+        "ayat": "28"
+	},
+	{
+		"id": "73",
+		"surat": "Al-Muzzammil",
+		"mean": "Orang yang berselimut",
+        "ayat": "20"
+	},
+	{
+		"id": "74",
+		"surat": "Al-Muddatstsir",
+		"mean": "Orang yang berkemul",
+        "ayat": "56"
+	},
+	{
+		"id": "75",
+		"surat": "Al-Qiyaamah",
+		"mean": "Hari Kiamat",
+        "ayat": "40"
+	},
+	{
+		"id": "76",
+		"surat": "Al-Insaan",
+		"mean": "Manusia",
+        "ayat": "31"
+	},
+	{
+		"id": "77",
+		"surat": "Al-Mursalaat",
+		"mean": "Malaikat-malaikat yang diutus",
+        "ayat": "50"
+	},
+	{
+		"id": "78",
+		"surat": "An-Naba'",
+		"mean": "Berita besar",
+        "ayat": "40"
+	},
+	{
+		"id": "79",
+		"surat": "An-Naazi'aat",
+		"mean": "Para malaikat yang mencabut",
+        "ayat": "40"
+	},
+	{
+		"id": "80",
+		"surat": "'Abasa",
+		"mean": "Ia bermuka masam",
+        "ayat": "42"
+	},
+	{
+		"id": "81",
+		"surat": "At-Takwir",
+		"mean": "Menggulung",
+        "ayat": "29"
+	},
+	{
+		"id": "82",
+		"surat": "Al-Infithar",
+		"mean": "Terbelah",
+        "ayat": "19"
+	},
+	{
+		"id": "83",
+		"surat": "Al-Muthaffifiin",
+		"mean": "Orang-orang yang curang",
+        "ayat": "36"
+	},
+	{
+		"id": "84",
+		"surat": "Al-Insyiqaaq",
+		"mean": "Terbelah",
+        "ayat": "25"
+	},
+	{
+		"id": "85",
+		"surat": "Al-Buruuj",
+		"mean": "Gugusan bintang",
+        "ayat": "22"
+	},
+	{
+		"id": "86",
+		"surat": "Ath-Thaariq",
+		"mean": "Yang datang di malam hari",
+        "ayat": "17"
+	},
+	{
+		"id": "87",
+		"surat": "Al-A'laa",
+		"mean": "Yang paling tinggi",
+        "ayat": "19"
+	},
+	{
+		"id": "88",
+		"surat": "Al-Ghaasyiyah",
+		"mean": "Hari pembalasan",
+        "ayat": "26"
+	},
+	{
+		"id": "89",
+		"surat": "Al-Fajr",
+		"mean": "Fajar",
+        "ayat": "30"
+	},
+	{
+		"id": "90",
+		"surat": "Al-Balad",
+		"mean": "Negeri",
+        "ayat": "20"
+	},
+	{
+		"id": "91",
+		"surat": "Asy-Syams",
+		"mean": "Matahari",
+        "ayat": "15"
+	},
+	{
+		"id": "92",
+		"surat": "Al-Lail",
+		"mean": "Malam",
+        "ayat": "21"
+	},
+	{
+		"id": "93",
+		"surat": "Ad-Dhuhaa",
+		"mean": "Waktu matahari sepenggalan naik",
+        "ayat": "11"
+	},
+	{
+		"id": "94",
+		"surat": "Asy Syarh",
+		"mean": "Melapangkan",
+        "ayat": "8"
+	},
+	{
+		"id": "95",
+		"surat": "At-Tiin",
+		"mean": "Buah tin",
+        "ayat": "8"
+	},
+	{
+		"id": "96",
+		"surat": "Al-'Alaq",
+		"mean": "Segumpal darah",
+        "ayat": "19"
+	},
+	{
+		"id": "97",
+		"surat": "Al-Qadar",
+		"mean": "Kemuliaan",
+        "ayat": "5"
+	},
+	{
+		"id": "98",
+		"surat": "Al-Bayyinah",
+		"mean": "Bukti",
+        "ayat": "8"
+	},
+	{
+		"id": "99",
+		"surat": "Al-Zalzalah",
+		"mean": "Kegoncangan",
+        "ayat": "8"
+	},
+	{
+		"id": "100",
+		"surat": "Al-'Aadiyaat",
+		"mean": "Kuda perang yang berlari kencang",
+        "ayat": "11"
+	},
+	{
+		"id": "101",
+		"surat": "Al-Qaari'ah",
+		"mean": "Hari Kiamat",
+        "ayat": "11"
+	},
+	{
+		"id": "102",
+		"surat": "At-Takaatsur",
+		"mean": "Bermegah-megahan",
+        "ayat": "8"
+	},
+	{
+		"id": "103",
+		"surat": "Al-'Ashr",
+		"mean": "Waktu",
+        "ayat": "3"
+	},
+	{
+		"id": "104",
+		"surat": "Al-Humazah",
+		"mean": "Pengumpat",
+        "ayat": "9"
+	},
+	{
+		"id": "105",
+		"surat": "Al-Fiil",
+		"mean": "Gajah",
+        "ayat": "5"
+	},
+	{
+		"id": "106",
+		"surat": "Al-Quraisy",
+		"mean": "Suku Quraisy",
+        "ayat": "4"
+	},
+	{
+		"id": "107",
+		"surat": "Al-Maa'un",
+		"mean": "Barang-barang yang berguna",
+        "ayat": "7"
+	},
+	{
+		"id": "108",
+		"surat": "Al-Kautsar",
+		"mean": "Nikmat yang banyak",
+        "ayat": "3"
+	},
+	{
+		"id": "109",
+		"surat": "Al-Kaafiruun",
+		"mean": "Orang-orang kafir",
+        "ayat": "6"
+	},
+	{
+		"id": "110",
+		"surat": "An-Nashr",
+		"mean": "Pertolongan",
+        "ayat": "3"
+	},
+	{
+		"id": "111",
+		"surat": "Al-Lahab",
+		"mean": "Gejolak api",
+        "ayat": "5"
+	},
+	{
+		"id": "112",
+		"surat": "Al-Ikhlash",
+		"mean": "Memurnikan Keesaan Allah",
+        "ayat": "4"
+	},
+	{
+		"id": "113",
+		"surat": "Al-Falaq",
+		"mean": "Waktu subuh",
+        "ayat": "5"
+	},
+	{
+		"id": "114",
+		"surat": "An-Naas",
+		"mean": "Manusia",
+        "ayat": "6"
+	}
+]
